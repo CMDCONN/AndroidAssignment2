@@ -9,11 +9,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Bento
+import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -49,8 +51,21 @@ class MainActivity : ComponentActivity() {
                 val currentScreen = remember { mutableStateOf<Page>(Page.Awards) }
                 Scaffold(
                     topBar = {
-                        TopAppBar({ Text(currentScreen.value.title, textAlign = TextAlign.Center) })
+                        TopAppBar(
+                            title = { Text(currentScreen.value.title, textAlign = TextAlign.Center) },
+                            actions = {
+                                IconButton(onClick = {
+                                    if (navController.currentDestination?.route != Page.Profile.route) {
+                                        navController.navigate(Page.Profile.route)
+                                        currentScreen.value = Page.Profile
+                                    }
+                                }) {
+                                    Icon(Page.Profile.icon, contentDescription = Page.Profile.title)
+                                }
+                            }
+                        )
                     },
+                    // FROM LECTURE SLIDES | From Here ------------------------------------------------------------------
                     bottomBar = {
                         BottomAppBar {
                             BottomNavigationBar(navController, currentScreen)
@@ -61,6 +76,7 @@ class MainActivity : ComponentActivity() {
                         MainContent(navController)
                     }
                 }
+                //FROM LECTURE SLIDES | To Here -------------------------------------------------------------------------------------
             }
         }
     }
@@ -75,11 +91,11 @@ sealed class Page(
     object Events : Page("events", "Events", Icons.Default.Bento)
     object Food : Page("food", "Food", Icons.Default.Bento)
     object Socs : Page("socs", "Socs", Icons.Default.Bento)
-    object Profile : Page("profile", "Profile", Icons.Default.Bento)
+    object Profile : Page("profile", "Profile", Icons.Default.Face)
 
 }
 
-
+//FROM LECTURE SLIDES | From here -------------------------------------------------------------------------------------
 @Composable
 fun BottomNavigationBar(navController: NavHostController, currentScreen: MutableState<Page>) {
     val items = listOf(
@@ -87,8 +103,7 @@ fun BottomNavigationBar(navController: NavHostController, currentScreen: Mutable
         Page.Campus,
         Page.Events,
         Page.Food,
-        Page.Socs,
-        Page.Profile
+        Page.Socs
     )
     NavigationBar {
         items.forEach { page ->
@@ -109,6 +124,9 @@ fun BottomNavigationBar(navController: NavHostController, currentScreen: Mutable
         }
     }
 }
+
+// //FROM LECTURE SLIDES | To here  -------------------------------------------------------------------------------------
+
 @Composable
 fun MainContent(navController: NavHostController) {
     NavHost(navController, startDestination = Page.Awards.route) {
