@@ -1,0 +1,167 @@
+package com.example.studentroom.screens
+
+
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.SearchBar
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.studentroom.R
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun Food() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(248, 249, 255))
+            .padding(25.dp)
+            .verticalScroll(rememberScrollState())
+    ) {
+        Text(
+            text = "Campus Eats",
+            color = Color.Black,
+            fontSize = 35.sp,
+            lineHeight = 40.sp,
+            fontWeight = FontWeight.Bold,
+            fontFamily = FontFamily(Font(R.font.ibmplexsans_variable)),
+            modifier = Modifier.padding(top = 20.dp)
+        )
+        Text(
+            text = "Curated nutritional hubs for peak cognitive performance. Filter by budget and proximity.",
+            Modifier.padding(vertical = 20.dp),
+            fontSize = 15.sp,
+            color = Color.Black
+        )
+        //https://developer.android.com/develop/ui/compose/components/search-bar
+        SearchBar(
+            query = "",
+            onQueryChange = {},
+            onSearch = {},
+            active = false,
+            onActiveChange = {},
+            placeholder = { Text(text = "SEARCH FACILITIES...") },
+            shape = RectangleShape,
+            leadingIcon = {
+                Icon(Icons.Default.Search, contentDescription = null)
+            }
+        ) {}
+        FilterButtons()
+        HorizontalDivider(modifier = Modifier.padding(10.dp))
+
+        FoodBoxes("hello", "hekko", imageIn = R.drawable.cafe_italy)
+
+    }
+}
+
+@Composable
+fun FilterButtons(){
+    Box( modifier = Modifier
+        .padding(top=5.dp)
+        .fillMaxWidth()
+        .clip(shape = RoundedCornerShape(40.dp))) {
+        Row(modifier = Modifier.padding(6.dp)) {
+            Button(
+                modifier = Modifier.clip(shape = RoundedCornerShape(20.dp)),
+                onClick = { },
+                shape = RectangleShape,
+                // Setting the background and content colors
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.White,
+                    contentColor = Color.Black
+                )
+            ) {
+                Text("$")
+            }
+            Button(
+                modifier = Modifier.clip(shape = RoundedCornerShape(20.dp)),
+                onClick = { },
+                shape = RectangleShape,
+                // Setting the background and content colors
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.White,
+                    contentColor = Color.Black
+                )
+            ) {
+                Text("$$")
+            }
+            Button(
+                modifier = Modifier.clip(shape = RoundedCornerShape(20.dp)),
+                onClick = { },
+                shape = RectangleShape,
+                // Setting the background and content colors
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.White,
+                    contentColor = Color.Black
+                )
+            ) {
+                Text("$$$")
+            }
+        }
+    }
+}
+
+
+
+@Composable
+fun FoodBoxes(titleText: String, paraText: String, imageIn: Int? = null){
+    Box(
+        modifier = Modifier.fillMaxWidth().padding(top=20.dp).border(1.dp, Color.Gray).background(color = Color(255, 255, 255))
+    ){
+        Column{
+            if (imageIn != null) {
+                Image(
+                    painter = painterResource(id = imageIn),
+                    contentDescription = "My drawable image",
+                    modifier = Modifier.clip(RoundedCornerShape(10.dp))
+                )
+            }
+
+            Text(
+                text = titleText,
+                color = Color.Black,
+                fontSize = 35.sp,
+                lineHeight = 40.sp,
+                fontWeight = FontWeight.Bold,
+                fontFamily = FontFamily(Font(R.font.ibmplexsans_variable))
+            )
+            Text( text = paraText, color = Color.Black ,modifier = Modifier.padding(top = 5.dp) )
+        }
+    }
+}
+
+
+
+@Preview
+@Composable
+fun FoodPreview() {
+    Food()
+}
