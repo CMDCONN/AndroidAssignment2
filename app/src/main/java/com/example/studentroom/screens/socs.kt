@@ -74,7 +74,7 @@ fun Socs() {
         )
 
         Text(
-            text = "Elite Societies",
+            text = "All Societies",
             color = Color.Black,
             fontSize = 35.sp,
             lineHeight = 40.sp,

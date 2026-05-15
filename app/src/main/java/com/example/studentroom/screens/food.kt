@@ -77,8 +77,9 @@ fun Food() {
         FilterButtons()
         HorizontalDivider(modifier = Modifier.padding(10.dp))
 
-        FoodBoxes("hello", "hekko", imageIn = R.drawable.cafe_italy)
-
+        FoodBoxes("Cyber Cafe & Kitchen", "Precision-brewed espresso and nutrient-dense grain bowls for sustained focus.", distance = "200m . Bldg 4", imageIn = R.drawable.cafe_italy)
+        FoodBoxes("Pizza Stop", "Come get the best pizza in town for the best prices for students.", "1.3m . ST3")
+        FoodBoxes("The Java Cafe", "The best coffee in the nagbourhood, come down for class coffee and the best snacks", "345m . ST4")
     }
 }
 
@@ -132,28 +133,38 @@ fun FilterButtons(){
 
 
 @Composable
-fun FoodBoxes(titleText: String, paraText: String, imageIn: Int? = null){
+fun FoodBoxes(titleText: String, paraText: String, distance: String, imageIn: Int? = null){
     Box(
         modifier = Modifier.fillMaxWidth().padding(top=20.dp).border(1.dp, Color.Gray).background(color = Color(255, 255, 255))
     ){
-        Column{
+        Column(){
             if (imageIn != null) {
                 Image(
                     painter = painterResource(id = imageIn),
                     contentDescription = "My drawable image",
-                    modifier = Modifier.clip(RoundedCornerShape(10.dp))
                 )
             }
 
             Text(
+                modifier = Modifier.padding(start = 10.dp, top = 10.dp),
                 text = titleText,
                 color = Color.Black,
                 fontSize = 35.sp,
                 lineHeight = 40.sp,
                 fontWeight = FontWeight.Bold,
-                fontFamily = FontFamily(Font(R.font.ibmplexsans_variable))
+                fontFamily = FontFamily(Font(R.font.ibmplexsans_variable),
+
+                )
             )
-            Text( text = paraText, color = Color.Black ,modifier = Modifier.padding(top = 5.dp) )
+            Text(text = paraText, color = Color.Black ,modifier = Modifier.padding(top = 5.dp, start = 10.dp) )
+            HorizontalDivider(modifier = Modifier.padding(10.dp))
+
+            Column(modifier = Modifier.padding(start = 10.dp, top = 10.dp, bottom= 20.dp)) {
+                Text(text = "DISTANCE", color = Color(red = 0, green = 106, blue = 97), modifier=Modifier.padding(start = 5.dp) )
+                Text( text = distance, modifier = Modifier.padding(top=3.dp, start = 5.dp))
+            }
+
+
         }
     }
 }
