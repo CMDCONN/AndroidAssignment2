@@ -161,7 +161,7 @@ fun FoodBoxes(titleText: String, paraText: String, distance: String, imageIn: In
 
             Column(modifier = Modifier.padding(start = 10.dp, top = 10.dp, bottom= 20.dp)) {
                 Text(text = "DISTANCE", color = Color(red = 0, green = 106, blue = 97), modifier=Modifier.padding(start = 5.dp) )
-                Text( text = distance, modifier = Modifier.padding(top=3.dp, start = 5.dp))
+                Text( text = distance,color = Color.Black, modifier = Modifier.padding(top=3.dp, start = 5.dp))
             }
 
 
