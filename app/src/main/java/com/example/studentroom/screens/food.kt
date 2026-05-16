@@ -163,8 +163,6 @@ fun FoodBoxes(titleText: String, paraText: String, distance: String, imageIn: In
                 Text(text = "DISTANCE", color = Color(red = 0, green = 106, blue = 97), modifier=Modifier.padding(start = 5.dp) )
                 Text( text = distance,color = Color.Black, modifier = Modifier.padding(top=3.dp, start = 5.dp))
             }
-
-
         }
     }
 }
