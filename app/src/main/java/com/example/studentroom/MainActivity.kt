@@ -31,12 +31,15 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.studentroom.data.SocProfile
+import com.example.studentroom.data.socList
 import com.example.studentroom.screens.Awards
 import com.example.studentroom.screens.Campus
 import com.example.studentroom.screens.Events
 import com.example.studentroom.screens.Food
 import com.example.studentroom.screens.Profile
 import com.example.studentroom.screens.Socs
+import com.example.studentroom.screens.SocsDetailPage
 import com.example.studentroom.ui.theme.StudentRoomTheme
 
 
@@ -95,6 +98,8 @@ sealed class Page(
 
 }
 
+
+
 //FROM LECTURE SLIDES | From here -------------------------------------------------------------------------------------
 @Composable
 fun BottomNavigationBar(navController: NavHostController, currentScreen: MutableState<Page>) {
@@ -129,48 +134,19 @@ fun BottomNavigationBar(navController: NavHostController, currentScreen: Mutable
 
 @Composable
 fun MainContent(navController: NavHostController) {
-    NavHost(navController, startDestination = Page.Awards.route) {
-        composable(Page.Awards.route) { AwardsScreen() }
-        composable(Page.Campus.route) { CampusScreen() }
-        composable(Page.Events.route) { EventsScreen() }
-        composable(Page.Food.route) { FoodScreen() }
-        composable(Page.Socs.route) { SocsScreen() }
-        composable(Page.Profile.route) { ProfileScreen() }
-
+    NavHost(navController, startDestination = Page.Profile.route) {
+        composable(Page.Awards.route) { Awards() }
+        composable(Page.Campus.route) { Campus() }
+        composable(Page.Events.route) { Events() }
+        composable(Page.Food.route) { Food() }
+        composable(Page.Socs.route) { Socs(socList, navController) }
+        composable(Page.Profile.route) { Profile() }
+        composable(route = "socDetailsPage/{id}") { backStackEntry ->
+            val extractedID = backStackEntry.arguments?.getString("id")
+            SocsDetailPage(id = extractedID, socListIn = socList)
+        }
 
     }
-}
-
-
-
-@Composable
-fun ProfileScreen(){
-    Profile()
-}
-
-@Composable
-fun CampusScreen() {
-    Campus()
-}
-
-@Composable
-fun AwardsScreen() {
-    Awards()
-}
-
-@Composable
-fun EventsScreen(){
-    Events()
-}
-
-@Composable
-fun FoodScreen(){
-    Food()
-}
-
-@Composable
-fun SocsScreen(){
-    Socs()
 }
 
 @Preview

@@ -2,14 +2,21 @@ package com.example.studentroom.screens
 
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -65,6 +72,38 @@ fun Events() {
         MiniSocBoxes("E-Sports Gaming Night", "43")
     }
 }
+
+
+@Composable
+fun MiniSocBoxes(titleText: String, members: String) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 10.dp)
+            .height(75.dp)
+            .border(width = 1.dp, color = Color.Gray)
+            .background(color = Color.White)
+    ) {
+
+        Column(modifier = Modifier.padding(10.dp)) {
+            Text(text = titleText, fontSize = 20.sp, color = Color.Black)
+            Text(text = members + " Members", fontSize = 10.sp, color = Color.Black)
+        }
+// Icon Was generated with ai using the gemini-3-flash-preview model where the prompt was Context + "how do i put an arrow pointing to the right at the very right middle side of the minisocboxes composable"
+        Icon(
+            imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+            contentDescription = "Navigate",
+            modifier = Modifier
+                .align(Alignment.CenterEnd)
+                .padding(end = 15.dp),
+            tint = Color.Black
+        )
+
+    }
+}
+
+
+
 @Preview
 @Composable
 fun EventsPreview() {
