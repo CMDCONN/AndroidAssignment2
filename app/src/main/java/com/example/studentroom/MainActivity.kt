@@ -142,6 +142,7 @@ fun MainContent(navController: NavHostController) {
         composable(Page.Socs.route) { Socs(socList, navController) }
         composable(Page.Profile.route) { Profile() }
         composable(route = "socDetailsPage/{id}") { backStackEntry ->
+            // Gemini told me to use backStackEntry to get the ID passed into the socDetailsPage/{id}
             val extractedID = backStackEntry.arguments?.getString("id")
             SocsDetailPage(id = extractedID, socListIn = socList)
         }

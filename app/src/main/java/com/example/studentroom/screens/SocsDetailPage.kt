@@ -52,7 +52,8 @@ fun SocsDetailPage(socListIn: List<SocProfile>, id: String?){
                 text = soc.name,
                 color = Color.Black,
                 fontSize = 32.sp,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                lineHeight = 30.sp
             )
 
             Spacings(10.dp)
