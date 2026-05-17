@@ -13,6 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.studentroom.R
@@ -25,9 +27,9 @@ fun SocCard(socProfile: SocProfile, clickAction: (SocProfile) -> Unit) {
             .padding(top = 16.dp, start = 16.dp, end = 16.dp)
             .fillMaxWidth()
             .wrapContentHeight(align = Alignment.Top)
-            .clickable { clickAction(socProfile) }
-            .background(color = Color.White),
-        elevation = CardDefaults.cardElevation(defaultElevation = 10.dp)
+            .clickable { clickAction(socProfile) },
+        shape = RectangleShape,
+
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
