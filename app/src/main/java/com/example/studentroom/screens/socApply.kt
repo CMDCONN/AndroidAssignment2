@@ -13,10 +13,12 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -31,6 +33,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -79,10 +82,43 @@ fun SocApply(navController: NavController, socApplyViewModel: SocApplyViewModel)
             }
         }
 // order details
+        // Gross awful terrible i hate it | ------------------------------------------------------------------------------------
+        Spacer(modifier = Modifier.height(16.dp))
+
+        OutlinedTextField(
+            value = socApplyViewModel.studentId,
+            onValueChange = { socApplyViewModel.studentId = it },
+            label = { Text("Student ID") },
+            modifier = Modifier.fillMaxWidth(),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            // https://developer.android.com/reference/kotlin/androidx/compose/material3/OutlinedTextFieldDefaults
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = Color.Black,
+                focusedLabelColor = Color.Black,
+                cursorColor = Color.Black
+            )
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        OutlinedTextField(
+            value = socApplyViewModel.reason,
+            onValueChange = { socApplyViewModel.reason = it },
+            label = { Text("Reason for joining") },
+            modifier = Modifier.fillMaxWidth(),
+            // https://developer.android.com/reference/kotlin/androidx/compose/material3/OutlinedTextFieldDefaults
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = Color.Black,
+                focusedLabelColor = Color.Black,
+                cursorColor = Color.Black
+            )
+        )
+        // Gross awful terrible i hate it | ------------------------------------------------------------------------------------
+
         Spacer(modifier = Modifier.height(24.dp))
         Button(
             modifier = Modifier.clip(shape = RoundedCornerShape(20.dp)),
-            onClick = { },
+            onClick = { socApplyViewModel.isSubmitted = true },
             shape = RectangleShape,
             // Setting the background and content colors
             colors = ButtonDefaults.buttonColors(
@@ -91,6 +127,27 @@ fun SocApply(navController: NavController, socApplyViewModel: SocApplyViewModel)
             )
         ) {
             Text("Click here to join!")
+        }
+
+        if (socApplyViewModel.isSubmitted) {
+            val price = socApplyViewModel.socPrices[socApplyViewModel.selectedSoc] ?: 0
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(
+                text = "You have joined: ${socApplyViewModel.selectedSoc}",
+                color = Color.DarkGray,
+                fontSize = 18.sp,
+            )
+            Text(
+                text = "Membership Price: £$price",
+                color = Color.DarkGray,
+                fontSize = 16.sp,
+            )
+            var pricex2 = price*1.5
+            Text(
+                text = "Special offer right now get second ticket for 50% off: £$pricex2",
+                color = Color.DarkGray,
+                fontSize = 16.sp,
+            )
         }
     }
 }
