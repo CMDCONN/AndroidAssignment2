@@ -9,9 +9,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -39,9 +41,10 @@ fun Awards() {
         modifier = Modifier
             .fillMaxSize()
             .background(Color(248, 249, 255))
-            .padding(25.dp)
+            .padding(start = 25.dp, end = 25.dp)
             .verticalScroll(rememberScrollState())
     ) {
+        Spacer(modifier = Modifier.size(20.dp))
         Text( text = "DEPARTMENT OF COMPUTING", color = Color(red = 0, green = 106, blue = 97))
         Text(
             text = "Course Catalog",
@@ -77,7 +80,7 @@ fun Awards() {
 
         )
 
-
+        Spacer(modifier = Modifier.size(20.dp))
     }
 }
 

@@ -7,9 +7,11 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -43,9 +45,10 @@ fun Food() {
         modifier = Modifier
             .fillMaxSize()
             .background(Color(248, 249, 255))
-            .padding(25.dp)
+            .padding(start = 25.dp, end = 25.dp)
             .verticalScroll(rememberScrollState())
     ) {
+        Spacer(modifier = Modifier.size(20.dp))
         Text(
             text = "Campus Eats",
             color = Color.Black,
@@ -80,6 +83,7 @@ fun Food() {
         FoodBoxes("Cyber Cafe & Kitchen", "Precision-brewed espresso and nutrient-dense grain bowls for sustained focus.", distance = "200m . Bldg 4", imageIn = R.drawable.cafe_italy)
         FoodBoxes("Pizza Stop", "Come get the best pizza in town for the best prices for students.", "1.3m . ST3")
         FoodBoxes("The Java Cafe", "The best coffee in the nagbourhood, come down for class coffee and the best snacks", "345m . ST4")
+        Spacer(modifier = Modifier.size(20.dp))
     }
 }
 

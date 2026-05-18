@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -50,9 +51,10 @@ fun Campus() {
         modifier = Modifier
             .fillMaxSize()
             .background(Color(248, 249, 255))
-            .padding(25.dp)
+            .padding(start = 25.dp, end = 25.dp)
             .verticalScroll(rememberScrollState())
     ) {
+        Spacer(modifier = Modifier.size(20.dp))
         FullSizedImageBox("Main Computing Hub", R.drawable.main_comp_hub)
         Text(
             text = "GEAR OPEN TO STUDENTS",
@@ -160,6 +162,7 @@ fun BarButtons() {
             Color.Black,
             "SUPPORT"
         )
+        Spacer(modifier = Modifier.size(20.dp))
     }
 }
 

@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
@@ -25,6 +26,7 @@ import com.example.studentroom.data.SocProfile
 
 @Composable
 fun SocsDetailPage(socListIn: List<SocProfile>, id: String?){
+    Spacer(modifier = Modifier.size(20.dp))
 
     val soc = socListIn.find { it.id.toString() == id }
 
@@ -32,7 +34,7 @@ fun SocsDetailPage(socListIn: List<SocProfile>, id: String?){
         modifier = Modifier
             .fillMaxSize()
             .background(Color(248, 249, 255))
-            .padding(25.dp)
+            .padding(start = 25.dp, end = 25.dp)
             .verticalScroll(rememberScrollState())
     ){
         if (soc != null) {
@@ -68,6 +70,7 @@ fun SocsDetailPage(socListIn: List<SocProfile>, id: String?){
 
             Text(text = "Society not found", color = Color.Red)
         }
+        Spacer(modifier = Modifier.size(20.dp))
     }
 }
 

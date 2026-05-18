@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -57,12 +58,14 @@ import com.example.studentroom.data.socList
 
 @Composable
 fun Socs(socList: List<SocProfile>, navController: NavHostController) {
+    Spacer(modifier = Modifier.size(20.dp))
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .background(Color(248, 249, 255))
-            .padding(horizontal = 25.dp)
+            .padding(start = 25.dp, end = 25.dp)
     ) {
+
         item {
             Spacer(modifier = Modifier.height(25.dp))
             Text(text = "FEATURED GROUPS", color = Color(red = 0, green = 106, blue = 97))

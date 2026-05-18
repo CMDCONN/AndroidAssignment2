@@ -8,10 +8,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -36,9 +38,10 @@ fun Events() {
         modifier = Modifier
             .fillMaxSize()
             .background(Color(248, 249, 255))
-            .padding(25.dp)
+            .padding(start = 25.dp, end = 25.dp)
             .verticalScroll(rememberScrollState())
     ) {
+        Spacer(modifier = Modifier.size(20.dp))
         BarButtons()
         Text(
             modifier = Modifier.padding(top = 10.dp),
@@ -70,6 +73,7 @@ fun Events() {
         MiniSocBoxes("Python for Data Anlysis", "30")
         MiniSocBoxes("Career Fair: Tech 2024", "56")
         MiniSocBoxes("E-Sports Gaming Night", "43")
+        Spacer(modifier = Modifier.size(20.dp))
     }
 }
 
