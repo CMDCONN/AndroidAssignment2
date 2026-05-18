@@ -15,8 +15,13 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.PhotoCamera
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.IconButton
+import androidx.compose.ui.Alignment
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -41,6 +46,8 @@ import com.example.studentroom.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Food() {
+    val cameraLauncher = rememberLauncherForActivityResult(ActivityResultContracts.TakePicturePreview()) { _ -> }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -77,7 +84,16 @@ fun Food() {
                 Icon(Icons.Default.Search, contentDescription = null)
             }
         ) {}
-        FilterButtons()
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            FilterButtons()
+            Spacer(modifier = Modifier.weight(1f))
+            IconButton(onClick = { cameraLauncher.launch(null) }) {
+                Icon(Icons.Default.PhotoCamera, contentDescription = "Take photo", tint = Color.Black)
+            }
+        }
         HorizontalDivider(modifier = Modifier.padding(10.dp))
 
         FoodBoxes("Cyber Cafe & Kitchen", "Precision-brewed espresso and nutrient-dense grain bowls for sustained focus.", distance = "200m . Bldg 4", imageIn = R.drawable.cafe_italy)
@@ -91,7 +107,6 @@ fun Food() {
 fun FilterButtons(){
     Box( modifier = Modifier
         .padding(top=5.dp)
-        .fillMaxWidth()
         .clip(shape = RoundedCornerShape(40.dp))) {
         Row(modifier = Modifier.padding(6.dp)) {
             Button(

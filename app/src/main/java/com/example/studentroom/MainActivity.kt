@@ -15,7 +15,12 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Bento
+import androidx.compose.material.icons.filled.Business
+import androidx.compose.material.icons.filled.EmojiEvents
+import androidx.compose.material.icons.filled.Event
 import androidx.compose.material.icons.filled.Face
+import androidx.compose.material.icons.filled.Groups
+import androidx.compose.material.icons.filled.Restaurant
 import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -26,11 +31,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.studentroom.components.socApplyComponents.SocApplyViewModel
 import com.example.studentroom.data.SocProfile
 import com.example.studentroom.data.socList
 import com.example.studentroom.screens.Awards
@@ -38,6 +45,7 @@ import com.example.studentroom.screens.Campus
 import com.example.studentroom.screens.Events
 import com.example.studentroom.screens.Food
 import com.example.studentroom.screens.Profile
+import com.example.studentroom.screens.SocApply
 import com.example.studentroom.screens.Socs
 import com.example.studentroom.screens.SocsDetailPage
 import com.example.studentroom.ui.theme.StudentRoomTheme
@@ -52,6 +60,7 @@ class MainActivity : ComponentActivity() {
             StudentRoomTheme {
                 val navController: NavHostController = rememberNavController()
                 val currentScreen = remember { mutableStateOf<Page>(Page.Awards) }
+                val socApplyViewModel: SocApplyViewModel = viewModel()
                 Scaffold(
                     topBar = {
                         TopAppBar(
@@ -76,7 +85,7 @@ class MainActivity : ComponentActivity() {
                     }
                 ) { innerPadding ->
                     Box(modifier = Modifier.padding(innerPadding)){
-                        MainContent(navController)
+                        MainContent(navController, socApplyViewModel)
                     }
                 }
                 //FROM LECTURE SLIDES | To Here -------------------------------------------------------------------------------------
@@ -89,11 +98,11 @@ sealed class Page(
     val title: String,
     val icon: androidx.compose.ui.graphics.vector.ImageVector
 ){
-    object Awards : Page("awards", "Awards", Icons.Default.ThumbUp)
-    object Campus : Page("campus", "Campus", Icons.Default.Bento)
-    object Events : Page("events", "Events", Icons.Default.Bento)
-    object Food : Page("food", "Food", Icons.Default.Bento)
-    object Socs : Page("socs", "Socs", Icons.Default.Bento)
+    object Awards : Page("awards", "Awards", Icons.Filled.EmojiEvents)
+    object Campus : Page("campus", "Campus", Icons.Default.Business)
+    object Events : Page("events", "Events", Icons.Default.Event)
+    object Food : Page("food", "Food", Icons.Default.Restaurant)
+    object Socs : Page("socs", "Socs", Icons.Default.Groups)
     object Profile : Page("profile", "Profile", Icons.Default.Face)
 
 }
@@ -133,7 +142,7 @@ fun BottomNavigationBar(navController: NavHostController, currentScreen: Mutable
 // //FROM LECTURE SLIDES | To here  -------------------------------------------------------------------------------------
 
 @Composable
-fun MainContent(navController: NavHostController) {
+fun MainContent(navController: NavHostController, socApplyViewModel: SocApplyViewModel) {
     NavHost(navController, startDestination = Page.Profile.route) {
         composable(Page.Awards.route) { Awards() }
         composable(Page.Campus.route) { Campus() }
@@ -143,9 +152,9 @@ fun MainContent(navController: NavHostController) {
         composable(Page.Profile.route) { Profile() }
         composable(route = "socDetailsPage/{id}") { backStackEntry ->
             val extractedID = backStackEntry.arguments?.getString("id")
-            SocsDetailPage(id = extractedID, socListIn = socList)
+            SocsDetailPage(id = extractedID, socListIn = socList, navController = navController)
         }
-        composable(route = "socApply"){}
+        composable(route = "socApply"){ SocApply(navController, socApplyViewModel = socApplyViewModel) }
 
     }
 }
@@ -154,7 +163,7 @@ fun MainContent(navController: NavHostController) {
 @Composable
 fun MainContentPreview() {
     val navController: NavHostController = rememberNavController()
-    MainContent(navController)
+    MainContent(navController, viewModel())
 }
 
 

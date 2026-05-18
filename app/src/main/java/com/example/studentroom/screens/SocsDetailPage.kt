@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,11 +23,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
 import com.example.studentroom.components.SocPicture
 import com.example.studentroom.data.SocProfile
 
 @Composable
-fun SocsDetailPage(socListIn: List<SocProfile>, id: String?){
+fun SocsDetailPage(socListIn: List<SocProfile>, id: String?, navController: NavHostController){
     Spacer(modifier = Modifier.size(20.dp))
 
     val soc = socListIn.find { it.id.toString() == id }
@@ -66,10 +70,22 @@ fun SocsDetailPage(socListIn: List<SocProfile>, id: String?){
                 color = Color.DarkGray,
                 fontSize = 18.sp
             )
+            Spacer(modifier = Modifier.size(20.dp))
+            Button(
+                onClick = { navController.navigate("socApply") },
+                modifier = Modifier.fillMaxWidth(),
+                colors = ButtonDefaults.buttonColors(containerColor = Color.Black, contentColor = Color.White)
+            ) {
+                Text(text = "Apply Now")
+            }
+
         } else {
 
             Text(text = "Society not found", color = Color.Red)
         }
+
+
+
         Spacer(modifier = Modifier.size(20.dp))
     }
 }
