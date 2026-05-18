@@ -115,7 +115,6 @@ fun BottomNavigationBar(navController: NavHostController, currentScreen: Mutable
     val items = listOf(
         Page.Awards,
         Page.Campus,
-        Page.Events,
         Page.Food,
         Page.Socs
     )
@@ -145,7 +144,7 @@ fun BottomNavigationBar(navController: NavHostController, currentScreen: Mutable
 fun MainContent(navController: NavHostController, socApplyViewModel: SocApplyViewModel) {
     NavHost(navController, startDestination = Page.Profile.route) {
         composable(Page.Awards.route) { Awards() }
-        composable(Page.Campus.route) { Campus() }
+        composable(Page.Campus.route) { Campus(navController = navController) }
         composable(Page.Events.route) { Events() }
         composable(Page.Food.route) { Food() }
         composable(Page.Socs.route) { Socs(socList, navController) }

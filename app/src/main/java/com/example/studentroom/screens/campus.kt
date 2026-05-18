@@ -43,10 +43,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.studentroom.R
 
 @Composable
-fun Campus() {
+fun Campus(navController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -106,6 +108,14 @@ fun Campus() {
             "98%",
             0.98f
         )
+        HorizontalDivider(modifier = Modifier.padding(top = 36.dp, bottom = 36.dp))
+        Button(
+            onClick = { navController.navigate("events") },
+            modifier = Modifier.fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(containerColor = Color.Black, contentColor = Color.White)
+        ) {
+            Text(text = "Click Here for all campus events!")
+        }
         HorizontalDivider(modifier = Modifier.padding(top = 36.dp, bottom = 36.dp))
         NetworkInfraStatus()
     }
@@ -351,8 +361,4 @@ fun NetworkInfraStatus(){
     }
 }
 
-@Preview
-@Composable
-fun CampusPreview() {
-    Campus()
-}
+
